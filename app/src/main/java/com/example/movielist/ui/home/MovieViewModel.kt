@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel constructor(private val repository: MoviePopulerRepository) : BaseViewModel() {
     val showLoading = ObservableBoolean()
-    val populerMovieList = MutableLiveData<List<Movie>>()
+    val populerMovieList = MutableLiveData<Movie>()
     val showError = SingleLiveEvent<String>()
 
 

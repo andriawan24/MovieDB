@@ -21,14 +21,14 @@ class MoviePopulerRepositoryImp(private val apiService: ApiService
                                 private val context: Context,
                                 private val dao: MoviesPopulerDao) : MoviePopulerRepository {
 
-    override suspend fun getMoviePopuler(apiKey: String, page: Int): AppResult<List<Movie>> {
+    override suspend fun getMoviePopuler(apiKey: String, page: Int): AppResult<Movie> {
         val response = apiService.getMoviePopuler(apiKey, page)
 
         return try {
                 if (response.isSuccessful) {
                     //save the data
                     response.body()?.let {
-                        withContext(Dispatchers.IO) { dao.add(it[0].results) }
+                        withContext(Dispatchers.IO) { dao.add(it.results) }
                     }
                     handleSuccess(response)
 

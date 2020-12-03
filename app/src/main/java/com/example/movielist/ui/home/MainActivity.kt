@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.lifecycleOwner = this
 
         movieViewModel.populerMovieList.observe(this, Observer {
-            if (it.isNotEmpty() && it != null) {
-                Log.d("apaya", it.get(0).results.get(0).title)
+            if ( it != null) {
+                Log.d("apaya", it.results.get(0).title)
             }
         } )
 

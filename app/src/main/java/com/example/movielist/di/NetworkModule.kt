@@ -1,6 +1,7 @@
 package com.example.movielist.di
 
 import com.example.movielist.BuildConfig
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,9 +30,12 @@ val networkModule = module {
     }
 
     fun provideRetrofit(client: OkHttpClient, baseUrl: String): Retrofit {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(client)
             .build()

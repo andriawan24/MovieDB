@@ -5,5 +5,5 @@ import com.example.movielist.util.AppResult
 
 interface MoviePopulerRepository {
 
-    suspend fun getMoviePopuler(apiKey: String, page: Int): AppResult<List<Movie>>
+    suspend fun getMoviePopuler(apiKey: String, page: Int): AppResult<Movie>
 }
