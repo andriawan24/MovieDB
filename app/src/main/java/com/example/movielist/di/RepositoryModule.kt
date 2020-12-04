@@ -1,18 +1,18 @@
 package com.example.movielist.di
 
 
-import aish.android.countries.db.MoviesPopulerDao
 import android.content.Context
+import com.example.movielist.db.MoviesPopulerDao
 import com.example.movielist.network.ApiService
-import com.example.movielist.repository.MoviePopulerRepository
-import com.example.movielist.repository.MoviePopulerRepositoryImp
+import com.example.movielist.repository.MovieRepository
+import com.example.movielist.repository.MovieRepositoryImp
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    fun provideMovieRepository(api: ApiService, context: Context, dao : MoviesPopulerDao): MoviePopulerRepository {
-        return MoviePopulerRepositoryImp(api, context, dao)
+    fun provideMovieRepository(api: ApiService, context: Context, dao : MoviesPopulerDao): MovieRepository {
+        return MovieRepositoryImp(api, context, dao)
     }
     single { provideMovieRepository(get(), androidContext(), get()) }
 

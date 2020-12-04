@@ -1,5 +1,6 @@
 package com.example.movielist.di
 
+import com.example.movielist.ui.detailMovie.DetailMovieViewModel
 import com.example.movielist.ui.home.MovieViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -11,4 +12,7 @@ val viewModelModule = module {
         MovieViewModel(get())
     }
 
+    viewModel {
+        DetailMovieViewModel(get())
+    }
 }

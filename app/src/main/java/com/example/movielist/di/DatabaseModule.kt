@@ -1,10 +1,10 @@
 package com.example.movielist.di
 
 
-import aish.android.countries.db.MoviesPopulerDao
 import android.app.Application
 import androidx.room.Room
 import com.example.movielist.db.MoviesDatabase
+import com.example.movielist.db.MoviesPopulerDao
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -16,12 +16,12 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideCountriesDao(database: MoviesDatabase): MoviesPopulerDao {
+    fun provideMoviesDao(database: MoviesDatabase): MoviesPopulerDao {
         return  database.moviePopulerDao
     }
 
     single { provideDatabase(androidApplication()) }
-    single { provideCountriesDao(get()) }
+    single { provideMoviesDao(get()) }
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.movielist
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.example.movielist.di.*
 import org.koin.android.ext.koin.androidContext
@@ -13,6 +14,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         MultiDex.install(this)
 
         startKoin {
