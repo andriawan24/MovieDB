@@ -37,6 +37,7 @@ class PopularAdapter(val context: Context?, val dataPopular: ArrayList<ResultMov
                         .load(BuildConfig.BASE_URL_IMAGE + dataPopulerMovies.backdrop_path)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
+                        .placeholder(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_250)
                         .into(it)
 
             }

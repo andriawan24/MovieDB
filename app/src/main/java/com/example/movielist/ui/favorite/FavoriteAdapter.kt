@@ -41,6 +41,7 @@ class FavoriteAdapter(val context: Context?, val dataFavorite: ArrayList<Favorit
                         .load(BuildConfig.BASE_URL_IMAGE + dataFavoriteMovies.image)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
+                        .placeholder(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_250)
                         .into(it)
 
             }

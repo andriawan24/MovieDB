@@ -40,6 +40,7 @@ class NowPlayingAdapter(val context: Context?, val dataNowPlaying: ArrayList<Res
                         .load(BuildConfig.BASE_URL_IMAGE + dataNowPlayingMovies.backdrop_path)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
+                        .placeholder(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_250)
                         .into(it)
 
             }

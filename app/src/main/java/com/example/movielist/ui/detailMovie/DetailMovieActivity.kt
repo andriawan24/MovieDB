@@ -19,6 +19,7 @@ import com.example.movielist.db.MoviesDatabase
 import com.example.movielist.db.model.FavoriteModel
 import com.example.movielist.ui.home.MainActivity
 import com.example.movielist.ui.home.MovieViewModel
+import com.example.movielist.util.NetworkManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 import kotlinx.android.synthetic.main.layout_bottom_sheet.*
@@ -81,6 +82,7 @@ class DetailMovieActivity : AppCompatActivity() {
                         .load(BuildConfig.BASE_URL_IMAGE + it)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
+                        .placeholder(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_250)
                         .into(ivDetailImage)
         }
 
@@ -98,9 +100,11 @@ class DetailMovieActivity : AppCompatActivity() {
                 tvReviewDetail.text = result[0].content
             }
         })
-
-        detalMovieViewModel.getMovieReview(url,BuildConfig.API_KEY, page)
-
+        if (NetworkManager.isOnline(this)) {
+            detalMovieViewModel.getMovieReview(url, BuildConfig.API_KEY, page)
+        }else{
+            Toast.makeText(this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show()
+        }
         ivBack.setOnClickListener(View.OnClickListener {
             finish()
         })

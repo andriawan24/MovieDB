@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
             topRatedAdapter.dataTopRated.clear()
             nowPlayingAdapter.dataNowPlaying.clear()
 
-            Toast.makeText(this, "Tidak Ada Koneksi Internet, Data diambil dari cache", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show()
             nowPlayingAdapter.dataNowPlaying.addAll(db.moviePopulerDao.findAllMovieNowPlaying())
             nowPlayingAdapter.notifyDataSetChanged()
 
@@ -138,11 +138,15 @@ class MainActivity : AppCompatActivity() {
         rv_popularMovie.adapter = popularAdapter
         scrollListenerPopular = object : EndlessRecyclerOnScrollListener(linearLayoutManager){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-              pagePopular+=1
+                if (isOnline(this@MainActivity)) {
+                    pagePopular+=1
 
-                movieViewModel.showLoading.set(true)
-                movieViewModel.getMoviePopuler(BuildConfig.API_KEY, pagePopular)
+                    movieViewModel.showLoading.set(true)
+                    movieViewModel.getMoviePopuler(BuildConfig.API_KEY, pagePopular)
+                }else{
+                    Toast.makeText(this@MainActivity, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show()
 
+                }
             }
 
         }
@@ -154,9 +158,15 @@ class MainActivity : AppCompatActivity() {
         rv_topratedMovie.adapter = topRatedAdapter
         scrollListenerTopRated = object  : EndlessRecyclerOnScrollListener(linearlayoutManagerTopRated){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                pageTopRated+=1
-                movieViewModel.showLoading.set(true)
-                movieViewModel.getMovieTopRated(BuildConfig.API_KEY, pageTopRated)
+                if (isOnline(this@MainActivity)) {
+                    pageTopRated+=1
+                    movieViewModel.showLoading.set(true)
+                    movieViewModel.getMovieTopRated(BuildConfig.API_KEY, pageTopRated)
+                }else{
+                    Toast.makeText(this@MainActivity, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show()
+
+                }
+
             }
 
         }
@@ -168,9 +178,15 @@ class MainActivity : AppCompatActivity() {
         rv_nowplayingMovie.adapter = nowPlayingAdapter
         scrollListenerNowPlaying = object : EndlessRecyclerOnScrollListener(linearlayoutManagerNowPlaying){
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                pageNowPlaying +=1
-                movieViewModel.showLoading.set(true)
-                movieViewModel.getMovieNowPlaying(BuildConfig.API_KEY, pageNowPlaying)
+                if (isOnline(this@MainActivity)) {
+                    pageNowPlaying +=1
+                    movieViewModel.showLoading.set(true)
+                    movieViewModel.getMovieNowPlaying(BuildConfig.API_KEY, pageNowPlaying)
+                }else{
+                    Toast.makeText(this@MainActivity, "Tidak Ada Koneksi Internet", Toast.LENGTH_LONG).show()
+
+                }
+
             }
         }
         rv_nowplayingMovie.addOnScrollListener(scrollListenerNowPlaying)
